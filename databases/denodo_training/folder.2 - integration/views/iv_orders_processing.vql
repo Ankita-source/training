@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW iv_orders_processing FOLDER = '/2 - integration' DESCRIPTION = 'This view returns information about orders that are being processed. An order is in the process when it is in ‘Delivered’ or ‘Accepted’ status'  AS SELECT bv_wo_orders.id AS id, bv_wo_orders.customer_code AS customer_code, bv_wo_orders.status AS status, bv_wo_orders.date_placed AS date_placed, bv_wo_orders.date_delivered AS date_delivered, bv_wo_orders.date_closed AS date_closed FROM bv_wo_orders WHERE status containsor ('Delivered, ACCEPTED');
+
+ALTER VIEW iv_orders_processing
+ LAYOUT (bv_wo_orders = [20, 20, 216, 105]);
+

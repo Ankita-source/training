@@ -1,0 +1,15 @@
+﻿CREATE OR REPLACE INTERFACE VIEW customer (
+        complete_name:text,
+        main_postcode:text (sourcetypedecimals = '10', sourcetyperadix = '10', sourcetypesize = '2000000000', sourcetypeid = '12'),
+        registered_date:text (sourcetypedecimals = '10', sourcetyperadix = '10', sourcetypesize = '2000000000', sourcetypeid = '12')
+    )
+    SET IMPLEMENTATION bv_wo_customer(
+        complete_name = (first_name||last_name),
+        main_postcode = cast('int', main_postcode),
+        registered_date = cast('localdate', registered_date)    
+)
+    FOLDER = '/4 - report views';
+
+ALTER VIEW customer
+ LAYOUT (bv_wo_customer = [542, 154, 239, 226]);
+

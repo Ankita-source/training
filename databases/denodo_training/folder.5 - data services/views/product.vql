@@ -1,0 +1,26 @@
+﻿CREATE OR REPLACE TYPE getallproductdetails_category AS REGISTER OF (categoryid:int, categoryname:text);
+
+CREATE OR REPLACE TYPE getallproductdetails_characteristics AS REGISTER OF (characteristic_dimensions:text, characteristic_weight:text, characteristic_details:text, characteristic_color:text);
+
+CREATE OR REPLACE TYPE getallproductdetails_accessories_productdata AS REGISTER OF (productid:int, productname:text, productprice:float);
+
+CREATE OR REPLACE TYPE getallproductdetails_accessories AS ARRAY OF getallproductdetails_accessories_productdata;
+
+CREATE OR REPLACE INTERFACE VIEW product (
+        code:text,
+        description:text,
+        warnings:text,
+        numresults:text,
+        productid:int,
+        productname:text,
+        productprice:float,
+        category:getallproductdetails_category,
+        characteristics:getallproductdetails_characteristics,
+        accessories:getallproductdetails_accessories
+    )
+    SET IMPLEMENTATION bv_product
+    FOLDER = '/5 - data services';
+
+ALTER VIEW product
+ LAYOUT (bv_product = [845, 106, 342, 226]);
+

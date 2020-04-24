@@ -1,0 +1,6 @@
+﻿CREATE OR REPLACE MATERIALIZED TABLE bv_order_status (
+        name:text, 
+        abbreviation:text
+    )
+    CONSTRAINT 'primary_key_status' PRIMARY KEY ( 'name' );
+
